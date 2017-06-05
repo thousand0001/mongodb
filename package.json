@@ -5,11 +5,13 @@
   "scripts": {
     "start": "node ."
   },
-  "author": "",
+  "author": "luke",
   "license": "ISC",
   "dependencies": {
     "mqtt": "^2.5.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+  	"express": "^4.15.3"
+  },
   "description": ""
 }
