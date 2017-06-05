@@ -43,10 +43,7 @@ kitty.age = 10;
 kitty.save();
 /////////
 */
-var mongodb = require('mongodb');
-var MongoClient = mongodb.MongoClient;
-MongoClient.connect('mongodb://thousand0001:mm570129@ds153730.mlab.com:53730/heroku_tmgjg46t', function(err,db){
-	var Cats = db.collection('cats');
+
 	/*
 	equipments.insert({
 		"qId": "dqiG02",
@@ -76,11 +73,7 @@ MongoClient.connect('mongodb://thousand0001:mm570129@ds153730.mlab.com:53730/her
 	
 */
 	
-	Cats.find({name:"Lulu"}).forEach(function(cat) {
-		console.log(cat.name+", "+cat.age);
-}, function(err) {
-  // done or error
-});
+
 
 	
 	
@@ -96,6 +89,21 @@ MongoClient.connect('mongodb://thousand0001:mm570129@ds153730.mlab.com:53730/her
 		//}
 //     });
 
+/*
+
+var mongodb = require('mongodb');
+var MongoClient = mongodb.MongoClient;
+MongoClient.connect('mongodb://thousand0001:mm570129@ds153730.mlab.com:53730/heroku_tmgjg46t', function(err,db){
+	var Cats = db.collection('cats');
+	
+	
+		Cats.find({name:"Lulu"}).forEach(function(cat) {
+		console.log(cat.name+", "+cat.age);
+}, function(err) {
+  // done or error
+});
+
 	db.close();
 			 
 });
+*/
