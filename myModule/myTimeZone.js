@@ -1,5 +1,5 @@
 //function timezone(){//"Asia/Taipei"
-exports.TPI = function(){
+exports.tpi = function(){
 var d = new Date();
 localTime = d.getTime();
 localOffset = d.getTimezoneOffset() * 60000;
