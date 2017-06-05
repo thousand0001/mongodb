@@ -9,15 +9,15 @@ app.get('/', function(request, response) {
   response.send('Hello World!');
 });
 //app.listen(3000);
-var port =  3000;
-app.listen(port, function() {
-  console.log("Listening on " + port);
-});
- /*
+
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
-
+ /*
+var port = process.env.PORT || 3000;
+app.listen(port, function() {
+  console.log("Listening on " + port);
+});
 
 require ('./lib/db');
 var mongoose = require('mongoose');
