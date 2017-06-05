@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-var mytimezone = require("./mymodule/mytimezone.js");
+var mytimezone = require("./module/mytimezone.js");
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
