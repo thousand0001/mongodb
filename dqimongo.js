@@ -1,6 +1,7 @@
+
 var express = require('express');
 var app = express();
-var mytimezone = require("./module/mytimezone.js");
+var mytimezone = require("./mymodule/mytimezone.js");
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 app.get('/', function(request, response) {
@@ -10,44 +11,50 @@ app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
   console.log("Now time :"+mytimezone.tpi());
 });
- /*
-var port = process.env.PORT || 3000;
-app.listen(port, function() {
-  console.log("Listening on " + port);
-});
-require ('./lib/db');
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var MongoClient = require('mongodb').MongoClient;
+var mongoUtil = require( './mymodule/mongoUtil' );
+var mongoConn = mongoUtil.connectToServer( function( err ) {
+	var db = mongoUtil.getDb();
+	var coll = mongoUtil.getCollection();
+	//var equipments = mongoUtil.equipments();
+	coll.find({ "eqId": "dqiG02"}).toArray(function(err, docs){
+			if (err) {
+				return;
+				}
+			for(index in docs) {
+			var doc = docs[index];
+			console.log(doc.valveId+"_id:"+doc._id);
+			//console.log(doc._id);
+			//_id
+			}
+		db.close();	
+		});	
+	});
 
-var Cat = mongoose.model('Cat');
-var kitty = new Cat();
-kitty.name = 'Lulu';
-kitty.age = 8;
-kitty.save()
-Cat.find({age:{$gt:7}}, function(err,cats){ //age > 7
-	for (var index in cats) {
-		var cat = cats[index];
-		console.log("No.:"+index);
-		console.log("name:"+cat.name);
-		console.log("age:"+cat.age);
-	}
-});
-
-Cat.insert({
-"name": 'luckitty',
-"age": 18
-})
-
-mongoose.disconnect();
- 
- 
-*/
- 
 /* 
- 
+MongoClient.connect( mongoUtil.dburl, function( err, db ) {
+	var col = db.collection('cats');
+	col.find({}).toArray(function(err, docs){
+		if (err) {
+			return;
+			}
+		for(index in docs) {
+		var doc = docs[index];
+		console.log(doc.name);
+		//
+		}
+	});		
+
+}); 
  
  ///////////
+  db.cats.find({}).toArray(function(err, docs){
+ for (index in docs){
+  var doc = docs[index];
+ 	}
  
+ })
+ ///////////////////
 var kitty = new Cat();
 kitty.name = 'Zildjian';
 kitty.age = 10;
