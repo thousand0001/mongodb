@@ -28,8 +28,9 @@ kitty.save()
 Cat.find({age:{$gt:7}}, function(err,cats){ //age > 7
 	for (var index in cats) {
 		var cat = cats[index];
-		console.log(cat.name);
-		console.log(cat.age);
+		console.log("No.:"+index);
+		console.log("name:"+cat.name);
+		console.log("age:"+cat.age);
 	}
 });
 
