@@ -15,7 +15,6 @@ var port = process.env.PORT || 3000;
 app.listen(port, function() {
   console.log("Listening on " + port);
 });
-*/
 require ('./lib/db');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
@@ -34,14 +33,15 @@ Cat.find({age:{$gt:7}}, function(err,cats){ //age > 7
 	}
 });
 
-var kitty = new Cat();
-kitty.name = 'dqicat';
-kitty.age = 8;
-kitty.save();
+Cat.insert({
+"name": 'luckitty',
+"age": 18
+})
 
- mongoose.disconnect();
+mongoose.disconnect();
  
  
+*/
  
 /* 
  
