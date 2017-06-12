@@ -32,13 +32,13 @@ var mongoConn = mongoUtil.connectToServer( function( err ) {
 			//for(index in docs) {
 			docs.forEach( function(doc){
 			//var doc = docs[index];
-			
 			console.log(doc.eId+",Line id:"+doc.lId);
 			//arr.push(doc._id);
 			});
 		eId = null;	
 		})
 	})();
+	
 		//db.close();	
 });
 
