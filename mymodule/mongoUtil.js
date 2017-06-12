@@ -7,22 +7,36 @@ var url ='mongodb://thousand0001:mm570129@ds153730.mlab.com:53730/heroku_tmgjg46
 // Connection url
 // Connect using MongoClient
 module.exports = {
-  connectToServer: function(callback) {
-    MongoClient.connect( url, function( err, db ) {
-      _db = db;
-      coll = db.collection(arg[0]);
-      return callback( err );
-    } );
-  },
-
-  getDb: function() {
-    return _db;
-  }, 
-  getCollection: function(){ 
-	return coll;
+	connectToServer: function(callback) {
+		MongoClient.connect( url, function( err, db ) {
+		_db = db;
+		//adb = new Mongo().getDB("heroku_tmgjg46t");
+		equipments = db.collection(arg[0]);
+		return callback( err );
+		});
 	},
-  testObj: {'name':'Luke', 'age':53},
-  dburl:url,
+
+	getDb: function() {
+		return _db;
+	}, 
+	getEquipments: function(){ 
+		return equipments;
+	},
+	getDocs: function(){
+		var arr;
+		function a(){
+			var arr1;
+			coll.find({}).toArray(function(err,docs){
+			arr1 = docs;
+			return arr1;
+			});
+			arr = arr1;
+		};
+		a();
+		return arr;			
+	},	
+	testObj: {'name':'Luke', 'age':53},
+	dburl:url
 };
 
 

@@ -1,37 +1,77 @@
 
+var mytimezone = require("./mymodule/mytimezone.js");
+var eId = 'dqs001';
+
+//////// express ////////////
+
 var express = require('express');
 var app = express();
-var mytimezone = require("./mymodule/mytimezone.js");
-app.set('port', (process.env.PORT || 5000));
-app.use(express.static(__dirname + '/public'));
-app.get('/', function(request, response) {
-  response.send('Hello dqimongo!');
-});
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
-  console.log("Now time :"+mytimezone.tpi());
-});
+	app.set('port', (process.env.PORT || 5000));
+	app.use(express.static(__dirname + '/public'));
+	app.get('/', function(request, response) {
+	  response.send('Hello dqimongo!');
+	});
+	app.listen(app.get('port'), function() {
+	  console.log('Node app is running on port', app.get('port'));
+	  console.log("Now time :"+mytimezone.tpi());
+	});
+
+
+//////////////// mongo /////////////////
+
 var MongoClient = require('mongodb').MongoClient;
 var mongoUtil = require( './mymodule/mongoUtil' );
 var mongoConn = mongoUtil.connectToServer( function( err ) {
 	var db = mongoUtil.getDb();
-	var coll = mongoUtil.getCollection();
-	//var equipments = mongoUtil.equipments();
-	coll.find({ "eqId": "dqiG02"}).toArray(function(err, docs){
+	var equipments = mongoUtil.getEquipments();
+	(function (){	
+		equipments.find({"eId":eId}).toArray(function(err,docs){
 			if (err) {
 				return;
-				}
-			for(index in docs) {
-			var doc = docs[index];
-			console.log(doc.valveId+"_id:"+doc._id);
-			//console.log(doc._id);
-			//_id
 			}
-		db.close();	
-		});	
-	});
+			//for(index in docs) {
+			docs.forEach( function(doc){
+			//var doc = docs[index];
+			
+			console.log(doc.eId+",Line id:"+doc.lId);
+			//arr.push(doc._id);
+			});
+		eId = null;	
+		})
+	})();
+		//db.close();	
+});
 
-/* 
+//////////////// mqtt //////////
+
+const TOPIC = "hello/world2";
+const HOST = 'mqtt://180.218.166.199';
+var mqtt = require('mqtt'); 
+var mqttClient  = mqtt.connect(HOST) 
+mqttClient.on('connect', function () {
+  mqttClient.subscribe(TOPIC);
+});
+mqttClient.on('message', function msg(topic, payload){
+	console.log("mqtt receive topic:"+topic+",payload:"+payload);
+	//var mongoConn = mongoUtil.connectToServer( function( err ) {	
+		var equipments = mongoUtil.getEquipments();
+		//console.log(typeof(payload)); console.log(JSON.stringify(payload));
+		equipments.find({"eId":payload.toString().trim()}).toArray(function(err, docs){
+			if (err) {
+				console.log("mqtt message call mongodb error!");
+				return;
+			}
+				//for (index in docs){
+			docs.forEach( function(doc){
+			console.log( "eId:"+doc.eId);
+			console.log( "lId:"+doc.lId);
+			}); 
+		});	
+	//});	
+});
+
+
+/* 	{"eId":payload}
 MongoClient.connect( mongoUtil.dburl, function( err, db ) {
 	var col = db.collection('cats');
 	col.find({}).toArray(function(err, docs){
