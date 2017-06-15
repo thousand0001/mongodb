@@ -47,8 +47,8 @@ var mqttClient  = mqtt.connect(HOST)
 mqttClient.on('connect', function () {
   mqttClient.subscribe(TOPIC);
 });
-mqttClient.on('message', function msg(topic, payload1){
-	mqttClient.on('message', function msg(topic, payload2){
+mqttClient.on('message', function msg1(topic, payload1){
+	mqttClient.on('message', function msg2(topic, payload2){
 			payload=payload1+payload2;	
 			console.log(payload);
 	//		mqttClient.end(function(){
@@ -58,6 +58,7 @@ mqttClient.on('message', function msg(topic, payload1){
 				} else{
 					console.log("mqtt end");
 				}
+		mqttClient.removeListener('message', msg2);
 	});
 	/*
 	var payloadJson = JSON.parse(payload);
