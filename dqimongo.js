@@ -23,10 +23,10 @@ var app = express();
 var facebooktoken = 'EAANIBnZBXqMQBAC95bYZBjPgnVSm666xEoGOKZApwIoLe9gZAmK42ZAphols3wugOFzVOZBrTxXe9geN3mMhaqZCLcdGnY78qtIkx9HrHJNXn8DphtAhpZBSyDTqu3NnEj5qNn34aZC0EXkmyBZBzVJwTZCu9fkMxcjjYv4w9kfP1zK1AZDZD';
 app.get('/webhook', function(req, res) {
   if (req.query['hub.mode'] === 'subscribe' &&
-      req.query['hub.verify_token'] === facebooktoken) {
+      req.query['hub.verify_token'] === 'EAANIBnZBXqMQBACFYUbqzClynpFkxZCGUcTpLKRwOCTyyHZAUdcA1ik8bRpQzRzZATNBn9t2GAZBcEi5yA1BKkyZAQSXKfgeIHZAAOTaAlpNxZBM02Gy7ZAD4ARsvSi00b2JRsQ573Jn9N7gUHd80X2xEB8rr5flZA2pQAG0ZBhkKkfagZDZD') {
     console.log("Validating webhook");
     res.status(200).send(req.query['hub.challenge']);
-  } else { 
+  } else {
     console.error("Failed validation. Make sure the validation tokens match.");
     res.sendStatus(403);
   }
