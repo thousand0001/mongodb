@@ -20,9 +20,9 @@ var app = express();
 	  //console.log("Now time :"+mytimezone.tpi());
 	});
 //////////////// facebook ////////////////
-var facebooktoken = 'EAANIBnZBXqMQBAC95bYZBjPgnVSm666xEoGOKZApwIoLe9gZAmK42ZAphols3wugOFzVOZBrTxXe9geN3mMhaqZCLcdGnY78qtIkx9HrHJNXn8DphtAhpZBSyDTqu3NnEj5qNn34aZC0EXkmyBZBzVJwTZCu9fkMxcjjYv4w9kfP1zK1AZDZD';
+//var facebooktoken = 'EAANIBnZBXqMQBAC95bYZBjPgnVSm666xEoGOKZApwIoLe9gZAmK42ZAphols3wugOFzVOZBrTxXe9geN3mMhaqZCLcdGnY78qtIkx9HrHJNXn8DphtAhpZBSyDTqu3NnEj5qNn34aZC0EXkmyBZBzVJwTZCu9fkMxcjjYv4w9kfP1zK1AZDZD';
 app.get('/webhook', function (req, res) {
-  if (req.query['hub.verify_token'] === facebooktoken) {
+  if (req.query['hub.verify_token'] === 'facebooktoken') {
     res.send(req.query['hub.challenge']);
   } else {
     res.send('Error, wrong validation token');
