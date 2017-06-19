@@ -61,10 +61,6 @@ function msg2(topic, payload2,packet2){
 	//}
 }
 
-
-
-
-
 mqttClient.on('message', function msg1(topic, payload1,packet1){
 	console.log("listen msg1");
 	if (payload1 == '123') {
