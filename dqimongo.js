@@ -21,24 +21,58 @@ var app = express();
 	});
 //////////////// facebook ////////////////
 var facebooktoken = 'EAANIBnZBXqMQBAC95bYZBjPgnVSm666xEoGOKZApwIoLe9gZAmK42ZAphols3wugOFzVOZBrTxXe9geN3mMhaqZCLcdGnY78qtIkx9HrHJNXn8DphtAhpZBSyDTqu3NnEj5qNn34aZC0EXkmyBZBzVJwTZCu9fkMxcjjYv4w9kfP1zK1AZDZD';
-app.get('/webhook', function (req, res) {
-  if (req.query['hub.verify_token'] === 'facebooktoken') {
+
+
+
+const port = '7123';
+const VERIFY_TOKEN =
+'1234';
+const PAGE_TOKEN = facebooktoken;
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get('/webhook/', (req, res) => {
+  if (req.query['hub.verify_token'] === facebooktoken) {
     res.send(req.query['hub.challenge']);
-  } else {
-    res.send('Error, wrong validation token');
   }
+  res.send('Error, wrong validation token');
 })
 
-function sendTextMessage(sender, text) {
-  messageData = {
-    text:text
+app.post('/webhook/', (req, res) => {
+
+  console.log(req.body);
+
+  const messaging_events = req.body.entry[0].messaging;
+  for (let i = 0; i < messaging_events.length; i++) {
+    const event = req.body.entry[0].messaging[i];
+    const sender = event.sender.id;
+    if (event.message && event.message.text) {
+      const text = event.message.text;
+      sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
+    }
   }
+  res.sendStatus(200);
+});
+
+app.listen(port, () => console.log(`listening on port ${port}`));
+
+function sendTextMessage(sender, text) {
+
+  const messageData = {
+    text: text
+  }
+
   request({
     url: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: {access_token:facebooktoken},
+    qs: {
+        access_token:PAGE_TOKEN
+    },
     method: 'POST',
     json: {
-      recipient: {id:sender},
+      recipient: {
+        id: sender
+      },
       message: messageData,
     }
   }, function(error, response, body) {
