@@ -1,7 +1,11 @@
 
 //var mytimezone = require("./mymodules/mytimezone.js");
 var eId ;
-
+var events = require('events');
+////////test///////////
+var moment = require('moment');
+var now = moment();
+console.log(now.format());
 //////// express ////////////
 
 var express = require('express');
@@ -40,6 +44,7 @@ var bindings = mongoUtil.getBindings();
 
 //////////////// mqtt //////////
 var i = 0;
+var payload;
 const TOPIC = "hello/world2";
 const HOST = 'mqtt://180.218.166.199';
 var mqtt = require('mqtt'); 
@@ -47,19 +52,31 @@ var mqttClient  = mqtt.connect(HOST)
 mqttClient.on('connect', function () {
   mqttClient.subscribe(TOPIC);
 });
-mqttClient.on('message', function msg1(topic, payload1){
-	mqttClient.on('message', function msg2(topic, payload2){
-			payload=payload1+payload2;	
-			console.log(payload);
-	//		mqttClient.end(function(){
-				if(mqttClient.connected){
-					i++;
-					console.log(i)
-				} else{
-					console.log("mqtt end");
-				}
-		mqttClient.removeListener('message', msg2);
-	});
+		 
+function msg2(topic, payload2,packet2){
+	console.log("listen msg2");
+	//if (payload2 == '123'){
+		payload+=payload2;	
+		console.log(payload);
+	//}
+}
+
+
+
+
+
+mqttClient.on('message', function msg1(topic, payload1,packet1){
+	console.log("listen msg1");
+	if (payload1 == '123') {
+		payload=payload1;
+		mqttClient.once('message',msg2);
+			
+		//setTimeout(function(){mqttClient.removeListener('message', msg2);console.log("removeListener msg2");}, 15000);	
+
+		//mqttClient.removeListener('message', msg2);
+		//mm();
+		//mqttClient.reconnect();
+	//mqttClient.removeListener('message', msg1);
 	/*
 	var payloadJson = JSON.parse(payload);
 	console.log("matt receive paylod.eId:"+payloadJson.eId);
@@ -79,6 +96,8 @@ mqttClient.on('message', function msg1(topic, payload1){
 	bindings=null;
 	payloadJson=null;	*/
   	//client.end()
+	};
 });
-
+console.log(mqttClient.listeners('connection'))
+setInterval(function(){ console.log('喔喔！'+(++i)) }, 2000);
 
