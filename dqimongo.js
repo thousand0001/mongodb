@@ -6,9 +6,11 @@ var events = require('events');
 
 //////// express ////////////
 
-var express = require('express');
+import express from 'express';
+//var express = require('express');
 var bodyParser = require('body-parser');
-var request = require('request');
+//var request = require('request');
+import request from 'request';
 var app = express();
 	app.set('port', (process.env.PORT || 5000));
 	app.use(express.static(__dirname + '/public'));
