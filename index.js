@@ -45,6 +45,6 @@ io.on('connection', function(socket){
   io.emit('message', {'message': 'hello world'});
   setInterval(function() {
     io.emit('date', {'date': new Date()});
-  }, 50);
+  }, 10);
 });
 server.listen(process.env.PORT || 8001);
