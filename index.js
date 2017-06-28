@@ -47,5 +47,4 @@ io.on('connection', function(socket){
     io.emit('date', {'date': new Date().toString()});
   }, 1000);
 });
-
 server.listen(process.env.PORT || 8001);
