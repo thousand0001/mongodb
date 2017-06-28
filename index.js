@@ -38,10 +38,11 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 app.use(express.static(__dirname + '/public'));
+// app.set('port', (process.env.PORT || 5000));
 io.on('connection', function(socket){
   socket.emit('message', {'message': 'hello world'});
   setInterval(function() {
     socket.emit('date', {'date': new Date()});
   }, 1000);
 });
-server.listen(8001);
+server.listen(process.env.PORT || 5000);
