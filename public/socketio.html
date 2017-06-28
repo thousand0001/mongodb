@@ -52,7 +52,7 @@
   <div>This is our socket.html file</div>
   <p id="pp">I would like to say: </p>
   <script>
-  var url = 'http://localhost:8001';
+  var url = 'https://dqimongo.herokuapp.com';
   var socket = io.connect(url);
   //var rcv ;
   //var socket = io.connect();
@@ -90,7 +90,8 @@ $("#pp").html('<b>現在時間：'+rcv+'</b>');    // jQuery
   context.stroke();
   }
 
-  drawBoard();  </script>
+  drawBoard();
+  </script>
   <div class="toggler">
   <div id="effect" class="ui-widget-content ui-corner-all">
     <h3 class="ui-widget-header ui-corner-all">Animate</h3>
