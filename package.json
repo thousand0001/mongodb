@@ -5,9 +5,12 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "ejs": "^2.5.6",
+    "events": "^1.1.1",
     "express": "^4.15.3",
     "linebot": "^1.3.0",
     "mongoose": "^4.10.5",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
     "request": "^2.81.0",
     "socket.io": "^2.0.3"
   },
@@ -16,5 +19,14 @@
   },
   "author": "thousand0001",
   "license": "ISC",
-  "devDependencies": {}
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thousand0001/mongodb.git"
+  },
+  "bugs": {
+    "url": "https://github.com/thousand0001/mongodb/issues"
+  },
+  "homepage": "https://github.com/thousand0001/mongodb#readme",
+  "description": ""
 }
