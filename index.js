@@ -44,7 +44,7 @@ io.on('connection', function(socket){
 
   io.emit('message', {'message': 'hello world'});
   setInterval(function() {
-    io.emit('date', {'date': Date(new Date().setUTCHours(8))});//Date.setUTCHours()
+    io.emit('date', {'date': Date(new Date().setUTCHours(8)).toString()});//Date.setUTCHours()
     //io.emit('date', {'date': Date(new Date().setUTCHours(0))});//Date.setUTCHours()
   }, 250);
 });
