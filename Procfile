@@ -1,1 +1,1 @@
-web: node dqimongo.js
+web: node index.js

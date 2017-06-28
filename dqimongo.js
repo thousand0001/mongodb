@@ -22,7 +22,7 @@ var app = express();
 	  //console.log("Now time :"+mytimezone.tpi());
 	});
 //////////////// facebook ////////////////
-
+/*
 var facebooktoken = 'EAANIBnZBXqMQBAC95bYZBjPgnVSm666xEoGOKZApwIoLe9gZAmK42ZAphols3wugOFzVOZBrTxXe9geN3mMhaqZCLcdGnY78qtIkx9HrHJNXn8DphtAhpZBSyDTqu3NnEj5qNn34aZC0EXkmyBZBzVJwTZCu9fkMxcjjYv4w9kfP1zK1AZDZD';
 
 
@@ -86,7 +86,7 @@ function sendTextMessage(sender, text) {
     }
   });
 }
-
+*/
 //////////////// mongoose /////////////////
 
 var mongoUtil = require( './mymodules/mongoUtil' );
@@ -95,14 +95,20 @@ var mongoConn = mongoUtil.connectToServer( function( err ) {
 var dqs = "dqs0033";
 var newUserId = "1234567890";
 var bindings = mongoUtil.getBindings();
-var data = new bindings({"eId":dqs,"lId":newUserId});
-data.save(function(err){
+var newdata = new bindings({"eId":dqs,"lId":newUserId});
+bindings.find({"eId":dqs,"lId":newUserId}).remove(function(){
+	console.log(newUserId+"is remove")
+});
+
+
+newdata.save(function(err){
 	if (err) {
 		return console.error(err);
 	} else {
 		console.log("newUserId儲存成功");
 	}
 });
+
 bindings = null;
 /*
 var bindings = mongoUtil.getBindings();
@@ -173,4 +179,7 @@ mqttClient.on('message', function msg1(topic, payload1,packet1){
 	};
 });
 console.log(mqttClient.listeners('connection'))
-setInterval(function(){ console.log('喔喔！'+(++i)) }, 2000);
+mqttClient.end();
+app.close();
+
+// setInterval(function(){ console.log('喔喔！'+(++i)) }, 2000);

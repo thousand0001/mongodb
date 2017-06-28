@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.slim.js"></script>
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+</head>
+<body>
+  <form>
+    <p>
+      <a href="#" id="day2">計算</a>
+    </p>
+    <p>
+      <input type  = "text" name = "day" id = "day">
+    </p>
+  </form>
+  <div>This is our socket.html file</div>
+  <script>
+  var socket = io.connect('http://localhost:8001');
+//var socket = io.connect();
+  socket.on('message', function(data){
+    console.log(data.message);
+  });
+  socket.on('date', function(data){
+    console.log(data.date);
+    $("#day").val(data.date);
+  })
+  </script>
+</body>
+</html>
