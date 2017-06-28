@@ -7,16 +7,17 @@
     crossorigin="anonymous"></script>
   </head>
   <body>
+    <span id="date">0</span>
       <script>
-      var url = "http://192.168.33.15:8001";
+      var url = "http://localhost:8001";
         var socket = io.connect(url);
         socket.on('connect', function(){console.log('connect websocket to '+url)});
 
         socket.on('date', function(data) {
           $('#date').text(data.date);
+          console.log(data.date);
         });
       </script>
-      <div id="date"></div>
     </body>
 
 </html>

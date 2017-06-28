@@ -44,7 +44,8 @@ io.on('connection', function(socket){
 
   io.emit('message', {'message': 'hello world'});
   setInterval(function() {
-    io.emit('date', {'date': new Date().toString()});
-  }, 200);
+    io.emit('date', {'date': Date(new Date().setUTCHours(8))});//Date.setUTCHours()
+    //io.emit('date', {'date': Date(new Date().setUTCHours(0))});//Date.setUTCHours()
+  }, 250);
 });
 server.listen(process.env.PORT || 8001);
