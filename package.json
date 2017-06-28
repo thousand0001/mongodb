@@ -4,7 +4,6 @@
   "main": "index.js",
   "dependencies": {
     "body-parser": "^1.17.2",
-    "canvas": "^1.6.5",
     "ejs": "^2.5.6",
     "events": "^1.1.1",
     "express": "^4.15.3",
@@ -21,4 +20,4 @@
   "author": "thousand0001",
   "license": "ISC",
   "devDependencies": {}
-}  
+}
