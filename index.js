@@ -31,6 +31,8 @@ io.on('connection', function(socket){
   }, 1000);
 });
 io.listen(8001);
+/////////////
+app.set('port', (process.env.PORT || 5000));
 */
 
 var express = require('express');
@@ -38,11 +40,12 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 app.use(express.static(__dirname + '/public'));
-// app.set('port', (process.env.PORT || 5000));
 io.on('connection', function(socket){
-  socket.emit('message', {'message': 'hello world'});
+
+  io.emit('message', {'message': 'hello world'});
   setInterval(function() {
-    socket.emit('date', {'date': new Date()});
+    io.emit('date', {'date': new Date().toString()});
   }, 1000);
 });
-server.listen(process.env.PORT || 5000);
+
+server.listen(process.env.PORT || 8001);
