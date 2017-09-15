@@ -57,7 +57,7 @@ var mosca = require('mosca');
 ////////////////////////////////////
 var pubsubsettings = {
     type: 'mongo',
-    url: process.env.MONGOLAB_URI ||  'mongodb://thousand0001:mm570129@ds153730.mlab.com:53730/heroku_tmgjg46t',
+    url: 'mongodb://thousand0001:mm570129@ds153730.mlab.com:53730/heroku_tmgjg46t',
     pubsubCollection: 'mqtt',
     mongo: {}
 };
@@ -66,7 +66,7 @@ var server = new mosca.Server({
     backend: pubsubsettings,
     persistence: {
         factory: mosca.persistence.Mongo,
-        url: process.env.MONGOLAB_URI ||  'mongodb://thousand0001:mm570129@ds153730.mlab.com:53730/heroku_tmgjg46t'
+        url:   'mongodb://thousand0001:mm570129@ds153730.mlab.com:53730/heroku_tmgjg46t'
     }
 }, function() {
     server.attachHttpServer(app);
