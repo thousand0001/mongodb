@@ -62,7 +62,6 @@
   socket.on('date', function(data){
     rcv = data.date;
     console.log(rcv);
-    console.log(data.offset);
     $("#day").val(rcv);
 $("#pp").html('<b>現在時間：'+rcv+'</b>');    // jQuery
   })

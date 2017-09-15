@@ -1,23 +1,40 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.slim.js"></script>
+</head>
 <body>
 
-<canvas id="myCanvas" width="800" height="600" style="border:1px solid #d3d3d3;">
-Your browser does not support the HTML5 canvas tag.</canvas>
+  <canvas id="myCanvas" width="1024" height="768" style="border:1px solid black;">
+    Your browser does not support the HTML5 canvas tag.</canvas>
 
-<script>
-var c = document.getElementById("myCanvas");
-var ctx = c.getContext("2d");
-for (var index =0; index<5;index++){
-ctx.translate(60,0);
-ctx.rotate(5 * Math.PI / 180);
-//ctx.translate(-150,0);
-ctx.fillRect(0, 0, 50, 20);
-}
-</script>
+    <script>
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    ctx.fillStyle="#F5F5F5";
+    //ctx.fillStyle = "#aaaaaa";
+    ctx.beginPath();
+    ctx.fillRect(0, 0, c.width, c.height);
+    var drowpatt = function (){
+      for (var i=0; i < 25; i++) {
+        for (var j=0;j<12;j++){
+          ctx.fillStyle='#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+          ctx.fillStyle='#' + Math.floor(Math.random()*16777215).toString(16);
+          ctx.fillRect(j*80+10,i*25+10,30, 15);
+          ctx.font="10px white";
+          ctx.fillStyle="#FFFFFF";
+          ctx.fillText(i.toString()+j.toString(),j*80+10,i*25+20);
+        }
+      }
+    }
+    var url = 'https://dqimongo.herokuapp.com';
+    var socket = io.connect(url);
+      socket.on('date',drowpatt);
+      //drowpatt();
+    </script>
 
-<p><strong>Note:</strong> The canvas tag is not supported in Internet
-Explorer 8 and earlier versions.</p>
+    <p><strong>Note:</strong> The canvas tag is not supported in Internet
+      Explorer 8 and earlier versions.</p>
 
-</body>
-</html>
+    </body>
+    </html>

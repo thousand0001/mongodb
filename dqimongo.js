@@ -1,5 +1,6 @@
 
 //var mytimezone = require("./mymodules/mytimezone.js");
+/*
 var eId ;
 var events = require('events');
 ////////test///////////
@@ -92,25 +93,59 @@ function sendTextMessage(sender, text) {
 var mongoUtil = require( './mymodules/mongoUtil' );
 var mongoConn = mongoUtil.connectToServer( function( err ) {
 });
-var dqs = "dqs0033";
-var newUserId = "1234567890";
+var dqs = "dqs001";
+var newUserId = "U9b3f25184cbfadb0d7b2e9357d0c6f64";
 var bindings = mongoUtil.getBindings();
-var newdata = new bindings({"eId":dqs,"lId":newUserId});
-bindings.find({"eId":dqs,"lId":newUserId}).remove(function(){
-	console.log(newUserId+"is remove")
-});
-
-
-newdata.save(function(err){
-	if (err) {
-		return console.error(err);
-	} else {
-		console.log("newUserId儲存成功");
+var equips = mongoUtil.getEquips();
+//var newEquip = new equips({"eId":dqs,"lId":newUserId});
+// Model.find( {...}, function (err, results) {
+bindings.find({"eId":dqs,"lId":newUserId},function(err, results){
+	if (err){
+		console.log('bindings.find error');
+		return;
 	}
+	if (!results.length) {
+		console.log('not found');
+	}else{
+		console.log('resutls.length: '+results.length);
+		//results.forEach(function(err, index){
+//bindings.remove(results,function(err,docs){
+	//
+//});			//results.remove(function(){
+				//;
+			}
+		//})
+		//console.log(newUserId+" is remove");
+
+
+	//mongoUtil.disconnect();
 });
 
-bindings = null;
+// for (var i=1;i<10;i++){
+// 	var newEquip = new  equips();
+// 	newEquip.eId = 'dqs00'+i.toString();
+// 	newEquip.password = '123456';
+// 	newEquip.save(function(err){
+// 		if (err) {
+// 			return console.error(err);
+// 		} else {
+// 			console.log('dqs00'+i+" 儲存成功");
+// 		}
+// 		newEquip = null;
+// 		delete newEquip;
+// 	// 	//mongoUtil.disconnect();
+// 	});
+// }
+mongoUtil.removeBinding(newUserId);
+// bindings.remove({"lId":newUserId},function(err){
+// 	if(err){
+// 		console.log("remove error");
+// 		return;
+// 	}
+// 	console.log("remove ack");
+// })
 /*
+
 var bindings = mongoUtil.getBindings();
 (function (){
 	console.log("typeof bindings: "+typeof(bindings));
@@ -127,6 +162,7 @@ var bindings = mongoUtil.getBindings();
 */
 
 //////////////// mqtt //////////
+/*
 var i = 0;
 var payload;
 const TOPIC = "hello/world2";
@@ -151,35 +187,12 @@ mqttClient.on('message', function msg1(topic, payload1,packet1){
 		payload=payload1;
 		mqttClient.once('message',msg2);
 
-		//setTimeout(function(){mqttClient.removeListener('message', msg2);console.log("removeListener msg2");}, 15000);
 
-		//mqttClient.removeListener('message', msg2);
-		//mm();
-		//mqttClient.reconnect();
-	//mqttClient.removeListener('message', msg1);
-	/*
-	var payloadJson = JSON.parse(payload);
-	console.log("matt receive paylod.eId:"+payloadJson.eId);
-	console.log("mqtt receive topic:"+topic+",payload:"+payload);
-		var bindings = mongoUtil.getBindings();
-		bindings.find({"eId":payloadJson.eId},function(err, docs){
-			if (err) {
-				console.log("mqtt message call mongodb error!");
-				return;
-			}
-			console.log("docs:"+docs);
-			docs.forEach( function(doc){
-				console.log( "eId:"+doc.eId);
-				console.log( "lId:"+doc.lId);
-			});
-		});
-	bindings=null;
-	payloadJson=null;	*/
-  	//client.end()
 	};
 });
 console.log(mqttClient.listeners('connection'))
 mqttClient.end();
-app.close();
+//app.close();
 
 // setInterval(function(){ console.log('喔喔！'+(++i)) }, 2000);
+*/

@@ -40,12 +40,46 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 app.use(express.static(__dirname + '/public'));
+
 io.on('connection', function(socket){
 
   io.emit('message', {'message': 'hello world'});
   setInterval(function() {
     io.emit('date', {'date':Date( Date.now())}) ;//Date.setUTCHours()
-    //io.emit('date', {'date': Date(new Date().setUTCHours(0))});//Date.setUTCHours()
   }, 1000);
 });
 server.listen(process.env.PORT || 8001);
+
+var mosca = require('mosca');
+
+var ascoltatore = {
+  //using ascoltatore
+  type: 'mongo',
+  // url: 'mongodb://localhost:27017/mqtt',
+  url: 'mongodb://thousand0001:mm570129@ds153730.mlab.com:53730/heroku_tmgjg46t',
+  pubsubCollection: 'ascoltatori',
+  mongo: {}
+};
+
+var settings = {
+  port: 1883,
+  backend: ascoltatore
+};
+
+var server = new mosca.Server(settings);
+
+server.on('clientConnected', function(client) {
+    console.log('client connected', client.id);
+});
+
+// fired when a message is received
+server.on('published', function(packet, client) {
+  console.log('Published', packet.payload);
+});
+
+server.on('ready', setup);
+
+// fired when the mqtt server is ready
+function setup() {
+  console.log('Mosca server is up and running');
+}
