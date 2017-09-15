@@ -49,7 +49,9 @@ io.on('connection', function(socket){
   }, 1000);
 });
 server.listen(process.env.PORT || 8001);
-
+app.get('/', function(request, response) {
+  response.send('Hello World!');
+});
 var mosca = require('mosca');
 
 var ascoltatore = {
