@@ -42,13 +42,17 @@ var io = require('socket.io')(server);
 app.use(express.static(__dirname + '/public'));
 
 io.on('connection', function(socket){
+  console.log("connection");
+  socket.on('event', function(data){
+    console.log("data received;");
+  });
 
   io.emit('message', {'message': 'hello world'});
   setInterval(function() {
     io.emit('date', {'date':Date( Date.now())}) ;//Date.setUTCHours()
   }, 1000);
 });
-server.listen(process.env.PORT || 8001);
+server.listen(process.env.PORT || 8005);
 app.get('/', function(request, response) {
   response.send('Hello World!!!!');
 });
@@ -62,17 +66,17 @@ var pubsubsettings = {
     mongo: {}
 };
 
-var server = new mosca.Server({
+var mserver = new mosca.Server({
     backend: pubsubsettings,
     persistence: {
         factory: mosca.persistence.Mongo,
         url:   'mongodb://thousand0001:mm570129@ds153730.mlab.com:53730/heroku_tmgjg46t'
     }
 }, function() {
-    server.attachHttpServer(app);
+    mserver.attachHttpServer(app);
 });
 
-server.on('ready', function() {
+mserver.on('ready', function() {
     console.log('Mosca is running');
 });
 /////////////////////////
