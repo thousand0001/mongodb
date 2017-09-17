@@ -3,7 +3,7 @@
   <title>WebSocket Test</title>
   <script language="javascript" type="text/javascript">
 
-  var wsUri = "wss://dqimongo.herokuapp.com:8005";
+  var wsUri = "ws://dqimongo.herokuapp.com:8005";
   var output;
 
   function init()
@@ -40,7 +40,7 @@
 
   function onError(evt)
   {
-    writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+    writeToScreen('<span style="color: red;">ERROR:</span> ');
   }
 
   function doSend(message)

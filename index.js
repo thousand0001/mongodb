@@ -47,10 +47,10 @@ io.on('connection', function(socket){
     console.log("data received;");
   });
 
-  io.emit('message', {'message': 'hello world'});
+  socket.emit('message', {'message': 'hello world'});
   setInterval(function() {
-    io.emit('date', {'date':Date( Date.now())}) ;//Date.setUTCHours()
-  }, 1000);
+    socket.emit('date', {'date':Date( Date.now())}) ;//Date.setUTCHours()
+  }, 2000);
 });
 server.listen(process.env.PORT || 8005);
 app.get('/', function(request, response) {
