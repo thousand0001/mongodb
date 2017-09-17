@@ -56,29 +56,7 @@ server.listen(process.env.PORT || 8005);
 app.get('/', function(request, response) {
   response.send('Hello World!!!!');
 });
-var mosca = require('mosca');
 
-////////////////////////////////////
-var pubsubsettings = {
-    type: 'mongo',
-    url: 'mongodb://thousand0001:mm570129@ds153730.mlab.com:53730/heroku_tmgjg46t',
-    pubsubCollection: 'mqtt',
-    mongo: {}
-};
-
-var mserver = new mosca.Server({
-    backend: pubsubsettings,
-    persistence: {
-        factory: mosca.persistence.Mongo,
-        url:   'mongodb://thousand0001:mm570129@ds153730.mlab.com:53730/heroku_tmgjg46t'
-    }
-}, function() {
-    mserver.attachHttpServer(app);
-});
-
-mserver.on('ready', function() {
-    console.log('Mosca is running');
-});
 /////////////////////////
 /*
 var ascoltatore = {
