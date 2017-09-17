@@ -47,9 +47,9 @@ io.on('connection', function(socket){
     console.log("data received;");
   });
 
-  socket.emit('message', {'message': 'hello world'});
+  socket.emit("'message', {'message': 'hello world'}");
   setInterval(function() {
-    socket.emit('date', {'date':Date( Date.now())}) ;//Date.setUTCHours()
+    socket.emit("'date', {'date':Date( Date.now())}") ;//Date.setUTCHours()
   }, 2000);
 });
 server.listen(process.env.PORT || 8005);
