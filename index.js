@@ -29,8 +29,11 @@ wss.on('connection', function connection(ws, req) {
     console.log('received: %s', message);
     ws.send(message);
   });
-
+  setInterval(function () {
+    ws.send(JSON.stringify({'name':'luke','company':'0937930981'}));
+  }, 1000);
 });
+
 
 server.listen(port, function () {
   console.log('Server listening at port %d', port);
