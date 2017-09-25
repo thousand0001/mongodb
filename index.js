@@ -27,11 +27,11 @@ wss.on('connection', function connection(ws, req) {
 
   ws.on('message', function incoming(message) {
     console.log('received: %s', message);
-    ws.send(message);
+    // ws.send(message);
   });
   setInterval(function () {
     ws.send(JSON.stringify({'name':'luke','company':'0937930981'}));
-  }, 5000);
+  }, 8000);
 });
 
 
