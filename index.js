@@ -10,7 +10,7 @@ const server = http.createServer(app);
 app.use(function (req, res) {
   res.send({ msg: "hello" });
 });
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname+ '/public'));
 
 const wss = new WebSocket.Server({ server });
 
