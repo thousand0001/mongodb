@@ -15,18 +15,18 @@ wss.on('connection', function connection(ws, req) {
   const ip = req.connection.remoteAddress;
   console.log('ip:'+ip.toString());
 
-  ws.on('message', function incoming(msg) {
-    var obj=JSON.parse(msg);
-    console.log('receive name: %s', obj.name);
-    console.log('receive company: %s', obj.company);
-    console.log('received time : %s', obj.time);
+  wss.on('message', function incoming(msg) {
+    // var obj=JSON.parse(msg);
+    // console.log('receive name: %s', obj.name);
+    // console.log('receive company: %s', obj.company);
+    console.log('received  : %s', msg);
+    wss.send(msg);
   });
-  var msg =  JSON.stringify({
-    'name': 'luke',
-    'company': '0987654321',
-    'time':Date.now()
-});
-  ws.send(msg);
+//   var msg =  JSON.stringify({
+//     'name': 'luke',
+//     'company': '0987654321',
+//     'time':Date.now()
+// });
 });
 // var io = require('../..')(server);
 var port = process.env.PORT || 3000;
