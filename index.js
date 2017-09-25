@@ -14,7 +14,9 @@ var port = process.env.PORT || 3000;
 // Routing
 // app.use(express.static(__dirname+'/public'));
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(function (req, res) {
+  res.send({ msg: "hello" });
+});
 // Chatroom
 const wss = new WebSocket.Server({ server });
 
