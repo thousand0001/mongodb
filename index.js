@@ -5,13 +5,13 @@ const WebSocket = require('ws');
 var path = require('path');
 
 const app = express();
+const server = http.createServer(app);
 
 app.use(function (req, res) {
   res.send({ msg: "hello" });
 });
 app.use(express.static(path.join(__dirname, 'public')));
 
-const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
 wss.on('connection', function connection(ws, req) {
