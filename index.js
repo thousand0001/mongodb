@@ -29,6 +29,10 @@ io.on('connection', function (socket) {
       message: data
     });
   });
+  socket.on('test',function(data){
+    console.log(data);
+    socket.emit(data);
+  });
 
   // when the client emits 'add user', this listens and executes
   socket.on('add user', function (username) {
