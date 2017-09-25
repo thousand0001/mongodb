@@ -31,7 +31,7 @@ wss.on('connection', function connection(ws, req) {
   });
   setInterval(function () {
     ws.send(JSON.stringify({'name':'luke','company':'0937930981'}));
-  }, 1000);
+  }, 5000);
 });
 
 
