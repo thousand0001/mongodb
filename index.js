@@ -38,8 +38,8 @@ wss.on('connection', function connection(ws, req) {
     // ws.send(message);
   });
   setInterval(function () {
-    console.log(ws.OPEN);
-    if (ws.OPEN)
+    // console.log(ws.OPEN);
+//    if (ws.OPEN)
       {ws.send(JSON.stringify({'name':'luke','company':'0937930981'}));
       // console.log(ws);
     }
