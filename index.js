@@ -19,7 +19,6 @@ app.use(function (req, res) {
 });
 // Chatroom
 const wss = new WebSocket.Server({ server });
-
 wss.on('connection', function connection(ws, req) {
   const location = url.parse(req.url, true);
   // You might use location.query.access_token to authenticate or share sessions
@@ -37,6 +36,7 @@ wss.on('connection', function connection(ws, req) {
 
 server.listen(port, function () {
   console.log('Server listening at port %d', port);
+  console.log("http server listening on %d", port);
 });
 // io.on('connection', function (socket) {
 //   var addedUser = false;
