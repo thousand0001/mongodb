@@ -35,7 +35,7 @@ wss.on('connection', function connection(ws, req) {
   });
   ws.on('message', function incoming(message) {
     console.log('received: %s', message);
-    ws.send('received:: %',message);
+    ws.send('received:: %s',message);
     // ws.send(message);
   });
 
