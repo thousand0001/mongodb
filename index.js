@@ -15,7 +15,7 @@ var iswsopen=0;
 // app.use(express.static(__dirname+'/public'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(function (req, res) {
-  res.send("Hello world, I'm Luke, this is my test pageeeee!");
+  res.send("Hello world, I'm Luke, this is my test page !\n run index.js" );
 });
 // Chatroom
 const wss = new WebSocket.Server({ server });
